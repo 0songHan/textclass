@@ -1,0 +1,738 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF.html">
+      
+      
+        <link rel="next" href="03-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E6%9E%90.html">
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>2.1 数据集介绍 - 头条投满分项目V4.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="头条投满分项目V4.0" class="md-header__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            头条投满分项目V4.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.1 数据集介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="头条投满分项目V4.0" class="md-nav__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    头条投满分项目V4.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF.html" class="md-nav__link">
+        1、项目背景
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          2、数据集
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          2、数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.1 数据集介绍
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="02-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link md-nav__link--active">
+        2.1 数据集介绍
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.项目数据概览
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.小节总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E6%9E%90.html" class="md-nav__link">
+        2.2 数据分析与处理
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          3、模型训练与测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          3、模型训练与测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html" class="md-nav__link">
+        3.1 随机森林-baseline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-fasttext%E5%AE%9E%E7%8E%B0.html" class="md-nav__link">
+        3.2 fastext的应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-bert%E6%A8%A1%E5%9E%8B.html" class="md-nav__link">
+        3.3 Bert模型使用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          4、模型压缩
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          4、模型压缩
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96.html" class="md-nav__link">
+        4.1 模型量化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F.html" class="md-nav__link">
+        4.2 知识蒸馏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F%E5%AE%9E%E8%B7%B5.html" class="md-nav__link">
+        4.3 知识蒸馏的实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10-%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D.html" class="md-nav__link">
+        4.4 模型剪枝
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.项目数据概览
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.小节总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">数据集介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>熟悉相关数据的格式和样例.</li>
+</ul>
+<hr />
+<hr />
+<h2 id="1">1.项目数据概览<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>项目中的数据来源基本分为3大种类:<ul>
+<li>第一类: 公司内部数据部门提供.<ul>
+<li>情况1: 数据平台有预处理, 提供的是"成品数据".</li>
+<li>情况2: 数据平台没有预处理, 只告诉开发人员"数据路径".</li>
+<li>情况3: 原始数据就没有, 需要开发人员沟通不同部分, 获取"业务数据".</li>
+</ul>
+</li>
+<li>第二类: 甲方提需求, 并提供数据.<ul>
+<li>情况1: 甲方有预处理数据, 提供的基本是"半成品数据".</li>
+<li>情况2: 甲方只负责"埋点", 后续数据需要开发人员处理.</li>
+<li>情况3: 甲方数据"匮乏", 甚至数据"缺失".</li>
+</ul>
+</li>
+<li>第三类: 需求画大饼阶段, 没有数据, 没有GPU, 只有"蓝图"和"展望".</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>本项目中的数据已经由字节预处理并完成了标注信息. 属于第一类中的情况1.<ul>
+<li>数据路径: 02-data/data/</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>data文件夹内容展示:</li>
+</ul>
+<p><img alt="image-20231106174426370" src="images/image-20231106174426370.png" /></p>
+<hr />
+<ul>
+<li>训练集数据: </li>
+</ul>
+<div class="highlight"><pre><span></span><code>02-data/data/train.txt
+</code></pre></div>
+<p>共180000条.</p>
+<div class="highlight"><pre><span></span><code>中华女子学院：本科层次仅1专业招男生     3
+两天价网站背后重重迷雾：做个网站究竟要多少钱    4
+东5环海棠公社230-290平2居准现房98折优惠 1
+卡佩罗：告诉你德国脚生猛的原因 不希望英德战踢点球       7
+82岁老太为学生做饭扫地44年获授港大荣誉院士      5
+记者回访地震中可乐男孩：将受邀赴美国参观        5
+冯德伦徐若�隔空传情 默认其是女友        9
+传郭晶晶欲落户香港战伦敦奥运 装修别墅当婚房     1
+《赤壁OL》攻城战诸侯战硝烟又起  8
+“手机钱包”亮相科博会    4
+上海2010上半年四六级考试报名4月8日前完成        3
+李永波称李宗伟难阻林丹取胜 透露谢杏芳有望出战   7
+3岁女童下体红肿 自称被幼儿园老师用尺子捅伤      5
+金证顾问：过山车行情意味着什么  2
+谁料地王如此虚  1
+《光环5》Logo泄露 Kinect版几无悬念      8
+海淀区领秀新硅谷宽景大宅预计10月底开盘  1
+柴志坤：土地供应量不断从紧 地价难现07水平(图)   1
+伊达传说EDDA Online     8
+三联书店建起书香巷      4
+宇航员尿液堵塞国际空间站水循环系统      4
+研究发现开车技术差或与基因相关  6
+皇马输球替补席闹丑闻 队副女球迷公然调情(视频)   7
+北京建工与市政府再度合作推出郭庄子限价房        1
+组图：李欣汝素颜出镜拍低碳环保大片      9
+</code></pre></div>
+<p>train.txt中包含180000行样本, 每行包括两列, 第一列为待分类的中文文本, 第二列是数字化标签, 中间用\t作为分隔符.</p>
+<ul>
+<li>测试集数据: </li>
+</ul>
+<div class="highlight"><pre><span></span><code>02-data/data/test.txt
+</code></pre></div>
+<p>共10000条.</p>
+<div class="highlight"><pre><span></span><code>词汇阅读是关键 08年考研暑期英语复习全指南       3
+中国人民公安大学2012年硕士研究生目录及书目      3
+日本地震：金吉列关注在日学子系列报道    3
+名师辅导：2012考研英语虚拟语气三种用法  3
+自考经验谈：自考生毕业论文选题技巧      3
+本科未录取还有这些路可以走      3
+2009年成人高考招生统一考试时间表        3
+去新西兰体验舌尖上的饕餮之旅(组图)      3
+四级阅读与考研阅读比较分析与应试策略    3
+备考2012高考作文必读美文50篇(一)        3
+名师详解考研复试英语听力备考策略        3
+热议：艺考合格证是高考升学王牌吗(组图)  3
+研究生办替考网站续：幕后老板年赚近百万(图)      3
+2011年高考文科综合试题(重庆卷)  3
+56所高校预估2009年湖北录取分数线出炉    3
+公共英语(PETS)写作中常见的逻辑词汇汇总  3
+时评：高考应成为教育公平的“助推器”      3
+九成外国人愿继续在日生活 六成留学生未返校       3
+教育部回应“取消高考户籍限制”    3
+2008年甘肃省高招不同于往年悬念叠出(图)  3
+送考队伍成海 高考场外那些煎熬的心       3
+09年小语种报考完全指南：仍须以高考为重(图)      3
+四六级考前阅读冲刺：如何发挥正常水平    3
+北京市海淀区09年高考第二次模拟考试题    3
+倪震：我国首位参加GRE考试的盲人大学生   3
+</code></pre></div>
+<p>test.txt中包含10000行样本, 每行包括两列, 第一列为待分类的中文文本, 第二列是数字化标签, 中
+间用\t作为分隔符.</p>
+<ul>
+<li>验证集数据: </li>
+</ul>
+<div class="highlight"><pre><span></span><code>02-data/data/dev.txt
+</code></pre></div>
+<p>共10000条.</p>
+<div class="highlight"><pre><span></span><code>体验2D巅峰 倚天屠龙记十大创新概览       8
+60年铁树开花形状似玉米芯(组图)  5
+同步A股首秀：港股缩量回调       2
+中青宝sg现场抓拍 兔子舞热辣表演 8
+锌价难续去年辉煌        0
+2岁男童爬窗台不慎7楼坠下获救(图)        5
+布拉特：放球员一条生路吧 FIFA能消化俱乐部的攻击 7
+金科西府 名墅天成       1
+状元心经：考前一周重点是回顾和整理      3
+发改委治理涉企收费每年为企业减负超百亿  6
+一年网事扫荡10年纷扰开心网李鬼之争和平落幕      4
+2010英国新政府“三把火”或影响留学业      3
+俄达吉斯坦共和国一名区长被枪杀  6
+朝鲜要求日本对过去罪行道歉和赔偿        6
+《口袋妖怪 黑白》日本首周贩售255万      8
+图文：借贷成本上涨致俄罗斯铝业净利下滑21%       2
+组图：新《三国》再曝海量剧照 火战场面极震撼     9
+麻辣点评：如何走出“被留学”的尴尬        3
+美股评论：SUN的苦涩曙光 2
+拾荒男子捡到任命书假冒老总 连骗二十多位女子     5
+英国夫妇再育“黑白”双胞胎        4
+从跟班到战友 灵兽伴你畅游传奇世界       8
+你有随身听 我有随身看：掌上故事会       8
+一封1968年的平信45.92万元成交   0
+女主人成功说服杀人躲避者自首    5
+</code></pre></div>
+<p>dev.txt中包含10000行样本, 每行包括两列, 第一列为待分类的中文文本, 第二列是数字化标签, 中 
+间用\t作为分隔符.</p>
+<ul>
+<li>类别集合数据: </li>
+</ul>
+<div class="highlight"><pre><span></span><code>02-data/data/class.txt
+</code></pre></div>
+<p>共10条.</p>
+<div class="highlight"><pre><span></span><code>finance
+realty
+stocks
+education
+science
+society
+politics
+sports
+game
+entertainment
+</code></pre></div>
+<p>class.txt中包含10个类别标签, 每行一个标签, 为英文单词的展示格式.</p>
+<h2 id="2">2.小节总结<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>对项目数据进行了介绍, 本项目拿到手的已经是数据平台部门处理好的"优质数据", 我们只需要将全部精力放在功能实现, 模型优化上即可.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="js/extra.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+      
+    
+  </body>
+</html>

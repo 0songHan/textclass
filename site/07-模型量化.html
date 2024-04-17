@@ -1,0 +1,832 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="06-bert%E6%A8%A1%E5%9E%8B.html">
+      
+      
+        <link rel="next" href="08-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F.html">
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>4.1 模型量化 - 头条投满分项目V4.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="头条投满分项目V4.0" class="md-header__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            头条投满分项目V4.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.1 模型量化
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="头条投满分项目V4.0" class="md-nav__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    头条投满分项目V4.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF.html" class="md-nav__link">
+        1、项目背景
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          2、数据集
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          2、数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        2.1 数据集介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E6%9E%90.html" class="md-nav__link">
+        2.2 数据分析与处理
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          3、模型训练与测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          3、模型训练与测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html" class="md-nav__link">
+        3.1 随机森林-baseline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-fasttext%E5%AE%9E%E7%8E%B0.html" class="md-nav__link">
+        3.2 fastext的应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-bert%E6%A8%A1%E5%9E%8B.html" class="md-nav__link">
+        3.3 Bert模型使用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          4、模型压缩
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          4、模型压缩
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4.1 模型量化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="07-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96.html" class="md-nav__link md-nav__link--active">
+        4.1 模型量化
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 什么是模型的量化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2pytorch" class="md-nav__link">
+    2.Pytorch的量化
+  </a>
+  
+    <nav class="md-nav" aria-label="2.Pytorch的量化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-config" class="md-nav__link">
+    2.1 配置类文件中的Config类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 模型量化实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 输出结果
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 输出结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1lineardynamicquantizedlinear" class="md-nav__link">
+    1.模型中的所有Linear层变成了DynamicQuantizedLinear层
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.训练和评估结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3.对比模型压缩后的大小
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    3.总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F.html" class="md-nav__link">
+        4.2 知识蒸馏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F%E5%AE%9E%E8%B7%B5.html" class="md-nav__link">
+        4.3 知识蒸馏的实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10-%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D.html" class="md-nav__link">
+        4.4 模型剪枝
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 什么是模型的量化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2pytorch" class="md-nav__link">
+    2.Pytorch的量化
+  </a>
+  
+    <nav class="md-nav" aria-label="2.Pytorch的量化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-config" class="md-nav__link">
+    2.1 配置类文件中的Config类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 模型量化实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 输出结果
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 输出结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1lineardynamicquantizedlinear" class="md-nav__link">
+    1.模型中的所有Linear层变成了DynamicQuantizedLinear层
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.训练和评估结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3.对比模型压缩后的大小
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    3.总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">模型量化<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标：</strong></p>
+<p>1.知道什么是量化？</p>
+<p>2.能够利用pytorch完成模型量化</p>
+<h2 id="1">1. 什么是模型的量化<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>通俗的理解, 就是将模型的参数精度进行降低操作, 用更少的比特位(torch.qint8)代替较多的比特位(torch.float32), 从而缩减模型, 并加速推断速度.</li>
+</ul>
+<p><img alt="1_1" src="images/1_1.png" /></p>
+<ul>
+<li>如上图所示, 左侧的是原始模型拥有更高的参数精度(float32), 等效于像素高, 看的清晰; 右侧的是量化后的模型, 拥有较低的参数精度(int8), 等效于像素低, 看的模糊, 但依然可以准确的识别图像内容.</li>
+<li>Pytorch的动态量化(Dynamic Quantization).</li>
+</ul>
+<hr />
+<h2 id="2pytorch">2.Pytorch的量化<a class="headerlink" href="#2pytorch" title="Permanent link">&para;</a></h2>
+<p>直接使用torch.quantization.quantize_dynamic()来实现量化操作即可,量化需要在cpu中完成，所以需要把设备信息设置为cpu.</p>
+<h3 id="21-config">2.1 配置类文件中的Config类<a class="headerlink" href="#21-config" title="Permanent link">&para;</a></h3>
+<p>将设备信息修改为cpu,该部分代码在：</p>
+<div class="highlight"><pre><span></span><code><span class="na">04-bert/src/models/bert.py</span>
+</code></pre></div>
+<p>具体如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在class Config中的__init__函数中修改下列代码部分</span>
+
+<span class="c1"># 模型训练+预测的时候, 放开下一行代码, 在GPU上运行.</span>
+<span class="c1"># self.device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)  # 设备</span>
+<span class="c1"># 模型量化的时候, 放开下一行代码, 在CPU上运行.</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cpu&#39;</span>
+</code></pre></div>
+<h3 id="22">2.2 模型量化实现<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>在这里我们使用上一章节训练好的bert模型进行量化</p>
+<p>该部分代码在：</p>
+<div class="highlight"><pre><span></span><code><span class="na">04-bert/src/run1.py</span>
+</code></pre></div>
+<p>首先导入工具包和模块：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入若干工具包</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">train_eval</span> <span class="kn">import</span> <span class="n">test</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">build_dataset</span><span class="p">,</span> <span class="n">build_iterator</span>
+</code></pre></div>
+<p>接下来根据命令行参数选择使用的模型类型（默认为 "bert"），然后加载对应模型的配置和模型定义。接着，通过构建数据集和数据迭代器，准备好用于测试的数据。加载模型参数，并将模型量化为8位整数。最后，测试量化后的模型在测试集上的性能，并保存量化后的模型。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 命令行参数解析</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chinese Text Classification&quot;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;bert&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;choose a model: bert&quot;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;bert&#39;</span><span class="p">:</span>
+        <span class="c1"># 指定模型类型为bert</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;bert&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;models.&quot;</span> <span class="o">+</span> <span class="n">model_name</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+        <span class="c1"># 设置随机种子，保证实验的可重复性</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># 数据迭代器的预处理和生成</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading data for Bert Model...&#39;</span><span class="p">)</span>
+        <span class="n">train_data</span><span class="p">,</span> <span class="n">dev_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">build_dataset</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="n">train_iter</span> <span class="o">=</span> <span class="n">build_iterator</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="n">dev_iter</span> <span class="o">=</span> <span class="n">build_iterator</span><span class="p">(</span><span class="n">dev_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="n">test_iter</span> <span class="o">=</span> <span class="n">build_iterator</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="c1"># 实例化模型并加载参数，注意不要加载到GPU上，只能在CPU上实现模型量化</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">save_path</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">))</span>
+        <span class="c1"># 量化BERT模型</span>
+        <span class="n">quantized_model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">quantization</span><span class="o">.</span><span class="n">quantize_dynamic</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">{</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">qint8</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">quantized_model</span><span class="p">)</span>
+        <span class="c1"># 测试量化后的模型在测试集上的表现</span>
+        <span class="n">test</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">quantized_model</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">)</span>
+        <span class="c1"># 保存量化后的模型</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">quantized_model</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">save_path2</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="23">2.3 输出结果<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<h4 id="1lineardynamicquantizedlinear">1.模型中的所有Linear层变成了DynamicQuantizedLinear层<a class="headerlink" href="#1lineardynamicquantizedlinear" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20231116152114257" src="images/image-20231116152114257.png" /></p>
+<h4 id="3">3.训练和评估结果<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>Test Loss:  0.25,  Test Acc: 91.92%
+Precision, Recall and F1-Score...
+               precision    recall  f1-score   support
+
+      finance     0.9561    0.8490    0.8994      1000
+       realty     0.9499    0.9300    0.9399      1000
+       stocks     0.8478    0.8580    0.8529      1000
+    education     0.9740    0.9360    0.9546      1000
+      science     0.8407    0.9080    0.8731      1000
+      society     0.9173    0.9100    0.9137      1000
+     politics     0.8961    0.9230    0.9094      1000
+       sports     0.9836    0.9620    0.9727      1000
+         game     0.9562    0.9390    0.9475      1000
+entertainment     0.8898    0.9770    0.9314      1000
+
+     accuracy                         0.9192     10000
+    macro avg     0.9212    0.9192    0.9194     10000
+ weighted avg     0.9212    0.9192    0.9194     10000
+
+Confusion Matrix...
+[[849   9  99   0   8  14  14   2   2   3]
+ [  7 930  15   0   8  13   8   1   3  15]
+ [ 26  18 858   0  54   1  35   1   3   4]
+ [  1   3   1 936  15  17  11   1   0  15]
+ [  1   2  15   2 908  12   8   1  28  23]
+ [  0  13   1  14  11 910  27   1   4  19]
+ [  3   2  18   5  31  13 923   0   0   5]
+ [  1   2   2   0   3   5   0 962   1  24]
+ [  0   0   3   1  37   4   0   3 939  13]
+ [  0   0   0   3   5   3   4   6   2 977]]
+</code></pre></div>
+<hr />
+<p>结论: 经过量化后的BERT模型, F1=91.92%, 相比于量化前的F1=93.64%有比较显著的下降, 但还可以接受, 也说明BERT模型的鲁棒性非常高!</p>
+<h4 id="3_1">3.对比模型压缩后的大小<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20231116150803529" src="images/image-20231116150803529.png" /></p>
+<p>模型参数文件大小缩减了256.6MB, 同时考虑到F1值仅仅下降了不到2个百分点, 效果非常优异!</p>
+<h2 id="3_2">3.总结<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>实现了对模型的动态量化, 并在CPU上测试了量化后的模型的表现, 验证了BERT模型具有良好的鲁棒性.</li>
+<li>
+<p>对比了BERT模型量化前后的大小, 说明BERT模型的压缩率很高, 同时还能保持表现不会显著下降. </p>
+</li>
+<li>
+<p>注意: 如果将模型加载到GPU上直接量化, 会报错如下:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code># 这说明动态量化目前在Pytorch平台上仅仅支持CPU上的操作!
+
+untimeError: Could not run &#39;quantized::linear_prepack&#39; with arguments from the &#39;UNKNOWN_TENSOR_TYPE_ID&#39; backend. &#39;quantized::linear_prepack&#39; is only available for these backends: [QuantizedCPU].
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="js/extra.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+      
+    
+  </body>
+</html>

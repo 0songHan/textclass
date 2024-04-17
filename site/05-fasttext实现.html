@@ -1,0 +1,1291 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html">
+      
+      
+        <link rel="next" href="06-bert%E6%A8%A1%E5%9E%8B.html">
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>3.2 fastext的应用 - 头条投满分项目V4.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fasttext" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="头条投满分项目V4.0" class="md-header__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            头条投满分项目V4.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.2 fastext的应用
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="头条投满分项目V4.0" class="md-nav__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    头条投满分项目V4.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF.html" class="md-nav__link">
+        1、项目背景
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          2、数据集
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          2、数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        2.1 数据集介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E6%9E%90.html" class="md-nav__link">
+        2.2 数据分析与处理
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          3、模型训练与测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          3、模型训练与测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html" class="md-nav__link">
+        3.1 随机森林-baseline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3.2 fastext的应用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="05-fasttext%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
+        3.2 fastext的应用
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.数据准备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.模型搭建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.模型优化
+  </a>
+  
+    <nav class="md-nav" aria-label="3.模型优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-fasttext1" class="md-nav__link">
+    3.1 fasttext优化1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fasttext2" class="md-nav__link">
+    3.2 fasttext优化2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 模型部署
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 模型部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1  服务端代码.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 客户端代码.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 结论
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-bert%E6%A8%A1%E5%9E%8B.html" class="md-nav__link">
+        3.3 Bert模型使用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          4、模型压缩
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          4、模型压缩
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96.html" class="md-nav__link">
+        4.1 模型量化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F.html" class="md-nav__link">
+        4.2 知识蒸馏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F%E5%AE%9E%E8%B7%B5.html" class="md-nav__link">
+        4.3 知识蒸馏的实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10-%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D.html" class="md-nav__link">
+        4.4 模型剪枝
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.数据准备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.模型搭建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.模型优化
+  </a>
+  
+    <nav class="md-nav" aria-label="3.模型优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-fasttext1" class="md-nav__link">
+    3.1 fasttext优化1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fasttext2" class="md-nav__link">
+    3.2 fasttext优化2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 模型部署
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 模型部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1  服务端代码.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 客户端代码.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 结论
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="fasttext">FastText模型<a class="headerlink" href="#fasttext" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标：</strong></p>
+<p>1.知道如何构建模型</p>
+<p>2.能够进行模型优化</p>
+<p>3.能够完成模型的部署</p>
+<hr />
+<p>Fasttext的案例代码结构如下所示：</p>
+<p><img alt="image-20231115150048720" src="images/image-20231115150048720.png" /></p>
+<h2 id="1">1.数据准备<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>使用 fastText 工具解决文本分类任务时，存放数据集的文本文件必须满足以下两个条件：</p>
+<ul>
+<li>
+<p>文本文件中的每一行对应一个文档；</p>
+</li>
+<li>
+<p>文档的类别标签以 __label__name 为前缀放在文档的最前面； </p>
+</li>
+</ul>
+<p>下面举两个符合条件的小例子。</p>
+<p>单标签数据集：</p>
+<div class="highlight"><pre><span></span><code><span class="na">__label__1</span><span class="w"> </span><span class="s">i love you</span>
+<span class="na">__label__0</span><span class="w"> </span><span class="s">i hate you</span>
+</code></pre></div>
+<p>上面的单标签数据集中一共有 2 个文档（每一行一个文档），第一个文档 "i love you"，对应的类别标签为 1（具体类别名为  前缀后面的文本），第二个文档 "i hate you"，对应的类别标签为 0。</p>
+<p>多标签数据集：</p>
+<div class="highlight"><pre><span></span><code><span class="na">__label__baking</span><span class="w"> </span><span class="s">__label__food-safety __label__substitutions __label__peanuts how to seperate peanut oil from roasted peanuts at home?</span>
+<span class="na">__label__chocolate</span><span class="w"> </span><span class="s">American equivalent for British chocolate terms</span>
+<span class="na">__label__baking</span><span class="w"> </span><span class="s">__label__oven __label__convection Fan bake vs bake</span>
+<span class="na">__label__sauce</span><span class="w"> </span><span class="s">__label__storage-lifetime __label__acidity __label__mayonnaise Regulation and balancing of readymade packed mayonnaise and other sauces</span>
+</code></pre></div>
+<p>多标签数据集中的不同的类别标签用空格来分割。比如：对于 "Regulation and balancing of readymade packed mayonnaise and other sauces" 文档的类别标签有 sauce、storage-lifetime、acidity 和 mayonnaise 5 个。</p>
+<p>**单标签和多标签数据集在 fastText 的使用上并没有区别 **</p>
+<p>所以需要将数据处理成上述形式。</p>
+<hr />
+<p>代码位置:</p>
+<div class="highlight"><pre><span></span><code><span class="na">03-fast_text/data/data/preprocess.py</span><span class="w"> </span>
+</code></pre></div>
+<ul>
+<li>获取数据集中的类别信息</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 存储数据集中的类别信息：id:label</span>
+<span class="n">id_to_label</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># id从0开始</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># 打开数据集类别文件</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;class.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+    <span class="c1"># 遍历每一行文本</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f1</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="c1"># 去掉换行符和空白符</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># 记录在字典中</span>
+        <span class="n">id_to_label</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+        <span class="c1"># id增加</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id_to_label:&#39;</span><span class="p">,</span> <span class="n">id_to_label</span><span class="p">)</span>
+</code></pre></div>
+<p>输出结果为：</p>
+<div class="highlight"><pre><span></span><code><span class="na">id_to_label</span><span class="o">:</span><span class="w"> </span><span class="s">{0: &#39;finance&#39;, 1: &#39;realty&#39;, 2: &#39;stocks&#39;, 3: &#39;education&#39;, 4: &#39;science&#39;, 5: &#39;society&#39;, 6: &#39;politics&#39;, 7: &#39;sports&#39;, 8: &#39;game&#39;, 9: &#39;entertainment&#39;}</span>
+</code></pre></div>
+<ul>
+<li>读取训练集数据，并转换为fasttext要求的形式</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用来存储训练集数据</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># 打开数据集文件，进行处理</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
+    <span class="c1"># 获取每一行数据</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f2</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># 获取文本和对应的标签信息</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># 1: 首先处理标签部分：获取标签id,并获取标签名称</span>
+        <span class="n">label_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">label_name</span> <span class="o">=</span> <span class="n">id_to_label</span><span class="p">[</span><span class="n">label_id</span><span class="p">]</span>
+        <span class="c1"># 构建fasttext需要的训练集数据</span>
+        <span class="n">new_label</span> <span class="o">=</span> <span class="s1">&#39;__label__&#39;</span> <span class="o">+</span> <span class="n">label_name</span>
+        <span class="c1"># 2: 然后处理文本部分, 可以按字划分, 也可以按词划分</span>
+        <span class="n">sent_char</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span>
+        <span class="c1"># 3: 将文本和标签组合成fasttext规定的格式</span>
+        <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">new_label</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">sent_char</span>
+        <span class="c1"># 4: 将数据添加到list中</span>
+        <span class="n">train_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div>
+<p>结果为：</p>
+<div class="highlight"><pre><span></span><code><span class="na">[&#39;__label__education</span><span class="w"> </span><span class="s">中 华 女 子 学 院 ： 本 科 层 次 仅 1 专 业 招 男 生&#39;, &#39;__label__science 两 天 价 网 站 背 后 重 重 迷 雾 ： 做 个 网 站 究 竟 要 多 少 钱&#39;, &#39;__label__realty 东 5 环 海 棠 公 社 2 3 0 - 2 9 0 平 2 居 准 现 房 9 8 折 优 惠&#39;, &#39;__label__sports 卡 佩 罗 ： 告 诉 你 德 国 脚 生 猛 的 原 因   不 希 望 英 德 战 踢 点 球&#39;, &#39;__label__society 8 2 岁 老 太 为 学 生 做 饭 扫 地 4 4 年 获 授 港 大 荣 誉 院 士&#39;]</span>
+</code></pre></div>
+<ul>
+<li>将数据写入到相应的文件中</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 将数据处理后的结果存储在txt文本中</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train_fast.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f3</span><span class="p">:</span>
+    <span class="c1"># 遍历每一行数据</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">:</span>
+        <span class="c1"># 写入到文件中</span>
+        <span class="n">f3</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FastText训练数据预处理完毕!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>输出结果: 查看train_fast.txt文件如下</p>
+<div class="highlight"><pre><span></span><code>__label__education 中 华 女 子 学 院 ： 本 科 层 次 仅 1 专 业 招 男 生
+__label__science 两 天 价 网 站 背 后 重 重 迷 雾 ： 做 个 网 站 究 竟 要 多 少 钱
+__label__realty 东 5 环 海 棠 公 社 2 3 0 - 2 9 0 平 2 居 准 现 房 9 8 折 优 惠
+__label__sports 卡 佩 罗 ： 告 诉 你 德 国 脚 生 猛 的 原 因   不 希 望 英 德 战 踢 点 球
+__label__society 8 2 岁 老 太 为 学 生 做 饭 扫 地 4 4 年 获 授 港 大 荣 誉 院 士
+__label__society 记 者 回 访 地 震 中 可 乐 男 孩 ： 将 受 邀 赴 美 国 参 观
+__label__entertainment 冯 德 伦 徐 若 � 隔 空 传 情   默 认 其 是 女 友
+__label__realty 传 郭 晶 晶 欲 落 户 香 港 战 伦 敦 奥 运   装 修 别 墅 当 婚 房
+__label__game 《 赤 壁 O L 》 攻 城 战 诸 侯 战 硝 烟 又 起
+__label__science “ 手 机 钱 包 ” 亮 相 科 博 会
+__label__education 上 海 2 0 1 0 上 半 年 四 六 级 考 试 报 名 4 月 8 日 前 完 成
+__label__sports 李 永 波 称 李 宗 伟 难 阻 林 丹 取 胜   透 露 谢 杏 芳 有 望 出 战
+__label__society 3 岁 女 童 下 体 红 肿   自 称 被 幼 儿 园 老 师 用 尺 子 捅 伤
+__label__stocks 金 证 顾 问 ： 过 山 车 行 情 意 味 着 什 么
+__label__realty 谁 料 地 王 如 此 虚
+__label__game 《 光 环 5 》 L o g o 泄 露   K i n e c t 版 几 无 悬 念
+__label__realty 海 淀 区 领 秀 新 硅 谷 宽 景 大 宅 预 计 1 0 月 底 开 盘
+__label__realty 柴 志 坤 ： 土 地 供 应 量 不 断 从 紧   地 价 难 现 0 7 水 平 ( 图 )
+__label__game 伊 达 传 说 E D D A   O n l i n e
+__label__science 三 联 书 店 建 起 书 香 巷
+__label__science 宇 航 员 尿 液 堵 塞 国 际 空 间 站 水 循 环 系 统
+__label__politics 研 究 发 现 开 车 技 术 差 或 与 基 因 相 关
+__label__sports 皇 马 输 球 替 补 席 闹 丑 闻   队 副 女 球 迷 公 然 调 情 ( 视 频 )
+__label__realty 北 京 建 工 与 市 政 府 再 度 合 作 推 出 郭 庄 子 限 价 房
+__label__entertainment 组 图 ： 李 欣 汝 素 颜 出 镜 拍 低 碳 环 保 大 片
+</code></pre></div>
+<hr />
+<ul>
+<li>同上处理测试集数据, 得到test_fast.txt; 同上处理验证集的数据, 得到dev_fast.txt</li>
+</ul>
+<hr />
+<h2 id="2">2.模型搭建<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>代码位置:</p>
+<div class="highlight"><pre><span></span><code><span class="na">03-fast_text/fast_text.py</span>
+</code></pre></div>
+<p>使用train_supervised函数训练模型，其中 input 参数指定包含训练数据集的文本文件，函数返回在训练集上训练好的模型对象，我们可以通过这个模型对象访问训练模型的各种信息。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="c1"># 指定训练集和测试集数据</span>
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="s1">&#39;./data/data/train_fast.txt&#39;</span>
+<span class="n">test_data_path</span> <span class="o">=</span> <span class="s1">&#39;./data/data/test_fast.txt&#39;</span>
+
+<span class="c1"># 开启模型训练</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;词的数量&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">words</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;标签值&#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># 开启模型测试</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_data_path</span><span class="p">)</span>
+<span class="c1"># 输出测试结果</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">Read</span><span class="w"> </span><span class="s">3M words</span>
+<span class="na">Number</span><span class="w"> </span><span class="s">of words:  4760</span>
+<span class="na">Number</span><span class="w"> </span><span class="s">of labels: 10</span>
+<span class="na">Progress</span><span class="o">:</span><span class="w"> </span><span class="s">100.0% words/sec/thread: 1745187 lr:  0.000000 avg.loss:  0.284760 ETA:   0h 0m 0s</span>
+<span class="na">词的数量</span><span class="o">:</span><span class="w"> </span><span class="s">4760</span>
+<span class="na">标签值</span><span class="o">:</span><span class="w"> </span><span class="s">[&#39;__label__science&#39;, &#39;__label__finance&#39;, &#39;__label__realty&#39;, &#39;__label__sports&#39;, &#39;__label__society&#39;, &#39;__label__politics&#39;, &#39;__label__stocks&#39;, &#39;__label__entertainment&#39;, &#39;__label__game&#39;, &#39;__label__education&#39;]</span>
+<span class="na">(10000,</span><span class="w"> </span><span class="s">0.9165, 0.9165)</span>
+</code></pre></div>
+<hr />
+<p>结论: 在10000条测试集上, 我们的模型得到了0.9165的精确率, 0.9165的召回率. 相比较随机森林已经有了大幅度的提升.</p>
+<hr />
+<h2 id="3">3.模型优化<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>对于任意表现良好的模型, 优化的脚步都不能停止!</li>
+</ul>
+<hr />
+<h3 id="31-fasttext1">3.1 fasttext优化1<a class="headerlink" href="#31-fasttext1" title="Permanent link">&para;</a></h3>
+<p>在真实的生产环境下, 对于fasttext模型一般不会采用费时费力的人工调参, 而都是用自动化最优参数搜索的模式.该代码位置在：
+<div class="highlight"><pre><span></span><code><span class="na">03-fast_text/fast_text_2.py</span>
+</code></pre></div></p>
+<p>接下来使用 FastText 框架进行文本分类模型的训练、测试和保存，具体过程为：</p>
+<ol>
+<li>指定训练集、验证集和测试集的文件路径。</li>
+<li>使用 <code>fasttext.train_supervised</code> 函数进行文本分类模型的训练，通过超参数调优来提高模型性能。</li>
+<li>使用 <code>model.test</code> 函数对测试集进行评估，输出评估结果。</li>
+<li>将训练好的模型保存到文件中，文件名包含当前时间戳。</li>
+</ol>
+<p>具体实现如下：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 获取训练集,测试集和验证集的路径</span>
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/train_fast.txt&#39;</span>
+<span class="n">dev_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/dev_fast.txt&#39;</span>
+<span class="n">test_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/test_fast.txt&#39;</span>
+
+<span class="c1"># 开启模型训练</span>
+<span class="c1"># autotuneValidationFile参数需要指定验证数据集所在的路径</span>
+<span class="c1"># 它将在验证集是使用随机搜索的方法寻找最优的超参数</span>
+<span class="c1"># 使用autotuneDuration参数可以控制随机搜索的时间, 默认是300秒.</span>
+<span class="c1"># 根据不同的需求, 可以延长或者缩短时间.</span>
+<span class="c1"># 调节的超参数包含这些内容:</span>
+<span class="c1"># lr                         学习率 default 0.1</span>
+<span class="c1"># dim                        词向量维度 default 100</span>
+<span class="c1"># ws                         上下文窗口大小 default 5， cbow</span>
+<span class="c1"># epoch                      epochs 数量 default 5</span>
+<span class="c1"># minCount                   最低词频 default 5</span>
+<span class="c1"># wordNgrams                 n-gram设置 default 1</span>
+<span class="c1"># loss                       损失函数 {hs,softmax} default softmax</span>
+<span class="c1"># minn                       最小字符长度 default 0</span>
+<span class="c1"># maxn                       最大字符长度 default 0</span>
+<span class="c1"># 我们设置verbose来观察超参数的值</span>
+<span class="c1"># verbose: 该参数决定日志打印级别, 当设置为3, 可以将当前正在尝试的超参数打印出来</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">train_data_path</span><span class="p">,</span> <span class="c1"># 训练集路径</span>
+                                  <span class="n">autotuneValidationFile</span><span class="o">=</span><span class="n">dev_data_path</span><span class="p">,</span> <span class="c1"># 验证集路径</span>
+                                  <span class="n">autotuneDuration</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="c1"># 时间单位为s</span>
+                                  <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># N_gram</span>
+                                  <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="c1"># 开启模型测试</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_data_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># 获取当前时间,作为模型文件的名称</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+<span class="n">model_save_path</span> <span class="o">=</span> <span class="s2">&quot;./toutiao_fasttext_</span><span class="si">{}</span><span class="s2">.bin&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time1</span><span class="p">)</span>
+<span class="c1"># 模型保存</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">model_save_path</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>/Users/mac/opt/anaconda3/envs/dltorch/bin/python /Users/mac/Desktop/投满分项目/03-code/03-fast_text/fast_text_2.py
+Trial = 1
+epoch = 5
+lr = 0.1
+dim = 100
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2000000
+dsub = 2
+loss = softmax
+Warning : wordNgrams is manually set to a specific value. It will not be automatically optimized.
+Progress:  33.5% Trials:    1 Best score:   unknown ETA:   0h 0m 3scurrentScore = 0.912
+train took = 2.26149
+Trial = 2
+epoch = 1
+lr = 0.705001
+dim = 320
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2211530
+dsub = 2
+loss = softmax
+Progress: 100.0% Trials:    2 Best score:  0.912000 ETA:   0h 0m 0s
+Training again with best arguments
+currentScore = 0.9051
+train took = 4.87654
+Best selected args = 0
+epoch = 5
+lr = 0.1
+dim = 100
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2000000
+dsub = 2
+loss = softmax
+Read 3M words
+Number of words:  4760
+Number of labels: 10
+Progress: 100.0% words/sec/thread: 1844699 lr:  0.000000 avg.loss:  0.283439 ETA:   0h 0m 0s
+(10000, 0.9172, 0.9172)
+</code></pre></div>
+<hr />
+<p>模型的保存结果为：</p>
+<p><img alt="image-20231113163641649" src="images/image-20231113163641649.png" /></p>
+<p>结论: 经过参数的自动搜索, 得到了最好的一版模型, 主要参数包括词嵌入维度dim=355, wordNgrams=2等. 模型的最终表现精准率等于91.73%, 召回率也是91.73%, 相比较最初的91.62%有稍许提升但并不显著.</p>
+<hr />
+<h3 id="32-fasttext2">3.2 fasttext优化2<a class="headerlink" href="#32-fasttext2" title="Permanent link">&para;</a></h3>
+<p>模型的优化不仅仅在架构上, 更要注意回溯到源头, 也就是数据端的优化.
+* 第一步: 原始数据采用词向量级别.
+* 第二步: 重新训练模型并评估.</p>
+<hr />
+<p>第一步: 原始数据采用词向量级别.</p>
+<p>代码位置: </p>
+<div class="highlight"><pre><span></span><code><span class="na">03-fast_text/data/data/preprocess1.py</span>
+</code></pre></div>
+<p>获取数据集中的类别信息</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">jieba</span>
+<span class="c1"># 存储数据集中的类别信息：id:label</span>
+<span class="n">id_to_label</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># id从0开始</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># 打开数据集类别文件</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;class.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+    <span class="c1"># 遍历每一行文本</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f1</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="c1"># 去掉换行符和空白符</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># 记录在字典中</span>
+        <span class="n">id_to_label</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+        <span class="c1"># id增加</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id_to_label:&#39;</span><span class="p">,</span> <span class="n">id_to_label</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>输出结果为：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">id_to_label</span><span class="o">:</span><span class="w"> </span><span class="s">{0: &#39;finance&#39;, 1: &#39;realty&#39;, 2: &#39;stocks&#39;, 3: &#39;education&#39;, 4: &#39;science&#39;, 5: &#39;society&#39;, 6: &#39;politics&#39;, 7: &#39;sports&#39;, 8: &#39;game&#39;, 9: &#39;entertainment&#39;}</span>
+</code></pre></div>
+<p>读取训练集数据，并转换为fasttext要求的形式</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用来存储训练集数据</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># 打开数据集文件，进行处理</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
+    <span class="c1"># 获取每一行数据</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f2</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># 获取文本和对应的标签信息</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># 1: 首先处理标签部分：获取标签id,并获取标签名称</span>
+        <span class="n">label_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">label_name</span> <span class="o">=</span> <span class="n">id_to_label</span><span class="p">[</span><span class="n">label_id</span><span class="p">]</span>
+        <span class="c1"># 构建fasttext需要的训练集数据</span>
+        <span class="n">new_label</span> <span class="o">=</span> <span class="s1">&#39;__label__&#39;</span> <span class="o">+</span> <span class="n">label_name</span>
+        <span class="c1"># 2: 然后处理文本部分, 可以按字划分, 也可以按词划分</span>
+        <span class="n">sent_char</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">sentence</span><span class="p">)))</span>
+        <span class="c1"># 3: 将文本和标签组合成fasttext规定的格式</span>
+        <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">new_label</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">sent_char</span>
+        <span class="c1"># 4: 将数据添加到list中</span>
+        <span class="n">train_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div>
+<ul>
+<li>结果为：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">[&#39;__label__education</span><span class="w"> </span><span class="s">中华 女子 学院 ： 本科 层次 仅 1 专业 招 男生&#39;, &#39;__label__science 两天 价 网站 背后 重重 迷雾 ： 做个 网站 究竟 要 多少 钱&#39;, &#39;__label__realty 东 5 环 海棠 公社 230 - 290 平 2 居 准现房 98 折 优惠&#39;, &#39;__label__sports 卡佩罗 ： 告诉 你 德国 脚 生猛 的 原因   不 希望 英德 战 踢 点球&#39;, &#39;__label__society 82 岁 老太 为 学生 做饭 扫地 44 年 获授 港大 荣誉 院士&#39;]</span>
+</code></pre></div>
+<p>将数据写入到相应的文件中</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 将数据处理后的结果存储在txt文本中</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train_fast.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f3</span><span class="p">:</span>
+    <span class="c1"># 遍历每一行数据</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">:</span>
+        <span class="c1"># 写入到文件中</span>
+        <span class="n">f3</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FastText训练数据预处理完毕!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>输出结果(查看train_fast1.txt文件):</li>
+</ul>
+<div class="highlight"><pre><span></span><code>__label__education      中华 女子 学院 ： 本科 层次 仅 1 专业 招 男生
+__label__science        两天 价 网站 背后 重重 迷雾 ： 做个 网站 究竟 要 多少 钱
+__label__realty 东 5 环 海棠 公社 230 - 290 平 2 居 准现房 98 折 优惠
+__label__sports 卡佩罗 ： 告诉 你 德国 脚 生猛 的 原因   不 希望 英德 战 踢 点球
+__label__society        82 岁 老太 为 学生 做饭 扫地 44 年 获授 港大 荣誉 院士
+__label__society        记者 回访 地震 中 可乐 男孩 ： 将 受邀 赴美国 参观
+__label__entertainment  冯德伦 徐若 � 隔空 传情   默认 其是 女友
+__label__realty 传 郭晶晶 欲 落户 香港 战 伦敦 奥运   装修 别墅 当婚 房
+__label__game   《 赤壁 OL 》 攻城战 诸侯 战 硝烟 又 起
+__label__science        “ 手机 钱包 ” 亮相 科博会
+__label__education      上海 2010 上半年 四六级 考试 报名 4 月 8 日前 完成
+__label__sports 李永波 称 李宗伟 难 阻林丹 取胜   透露 谢杏芳 有望 出战
+__label__society        3 岁 女童 下体 红肿   自称 被 幼儿园 老师 用 尺子 捅 伤
+__label__stocks 金证 顾问 ： 过山车 行情 意味着 什么
+__label__realty 谁料 地 王 如此 虚
+__label__game   《 光环 5 》 Logo 泄露   Kinect 版几无 悬念
+__label__realty 海淀区 领秀新 硅谷 宽景 大宅 预计 10 月底 开盘
+__label__realty 柴志坤 ： 土地 供应量 不断 从 紧   地价 难现 07 水平 ( 图 )
+__label__game   伊达 传说 EDDA   Online
+__label__science        三联书店 建起 书香 巷
+__label__science        宇航员 尿液 堵塞 国际 空间站 水 循环系统
+__label__politics       研究 发现 开车 技术 差 或 与 基因 相关
+__label__sports 皇马 输球 替补席 闹 丑闻   队 副 女球迷 公然 调情 ( 视频 )
+__label__realty 北京 建工 与 市政府 再度 合作 推出 郭 庄子 限价 房
+__label__entertainment  组图 ： 李欣汝素 颜 出镜 拍低 碳 环保 大片
+</code></pre></div>
+<hr />
+<p>测试集同样的方法进行处理, 得到结果文件test_fast1.txt; 验证集同样的方法进行处理, 得到结果文件dev_fast1.txt</p>
+<hr />
+<p>模型训练, 代码位置: </p>
+<div class="highlight"><pre><span></span><code>03-fast_text/fast_text_3.py
+</code></pre></div>
+<p>该代码与fast_text_2.py是完全一样的，不同的是数据集的位置不一样</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 获取训练集,测试集和验证集的路径</span>
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/train_fast1.txt&#39;</span>
+<span class="n">dev_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/dev_fast1.txt&#39;</span>
+<span class="n">test_data_path</span> <span class="o">=</span> <span class="s1">&#39;data/data/test_fast1.txt&#39;</span>
+
+<span class="c1"># 开启模型训练</span>
+<span class="c1"># autotuneValidationFile参数需要指定验证数据集所在的路径</span>
+<span class="c1"># 它将在验证集是使用随机搜索的方法寻找最优的超参数</span>
+<span class="c1"># 使用autotuneDuration参数可以控制随机搜索的时间, 默认是300秒.</span>
+<span class="c1"># 根据不同的需求, 可以延长或者缩短时间.</span>
+<span class="c1"># 调节的超参数包含这些内容:</span>
+<span class="c1"># lr                         学习率 default 0.1</span>
+<span class="c1"># dim                        词向量维度 default 100</span>
+<span class="c1"># ws                         上下文窗口大小 default 5， cbow</span>
+<span class="c1"># epoch                      epochs 数量 default 5</span>
+<span class="c1"># minCount                   最低词频 default 5</span>
+<span class="c1"># wordNgrams                 n-gram设置 default 1</span>
+<span class="c1"># loss                       损失函数 {hs,softmax} default softmax</span>
+<span class="c1"># minn                       最小字符长度 default 0</span>
+<span class="c1"># maxn                       最大字符长度 default 0</span>
+<span class="c1"># 我们设置verbose来观察超参数的值</span>
+<span class="c1"># verbose: 该参数决定日志打印级别, 当设置为3, 可以将当前正在尝试的超参数打印出来</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">train_data_path</span><span class="p">,</span> <span class="c1"># 训练集路径</span>
+                                  <span class="n">autotuneValidationFile</span><span class="o">=</span><span class="n">dev_data_path</span><span class="p">,</span> <span class="c1"># 验证集路径</span>
+                                  <span class="n">autotuneDuration</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="c1"># 时间单位为s</span>
+                                  <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># N_gram</span>
+                                  <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="c1"># 开启模型测试</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_data_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># 获取当前时间,作为模型文件的名称</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+<span class="n">model_save_path</span> <span class="o">=</span> <span class="s2">&quot;./toutiao_fasttext_</span><span class="si">{}</span><span class="s2">.bin&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time1</span><span class="p">)</span>
+<span class="c1"># 模型保存</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">model_save_path</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Warning : wordNgrams is manually set to a specific value. It will not be automatically optimized.
+Trial = 1
+epoch = 5
+lr = 0.1
+dim = 100
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2000000
+dsub = 2
+loss = softmax
+Progress:  41.9% Trials:    1 Best score:   unknown ETA:   0h 0m 3scurrentScore = 0.902
+train took = 2.6367
+Trial = 2
+epoch = 1
+lr = 0.595139
+dim = 268
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2201775
+dsub = 2
+loss = softmax
+Progress: 100.0% Trials:    2 Best score:  0.902000 ETA:   0h 0m 0s
+currentScore = 0.8978
+train took = 4.49292
+Best selected args = 0
+epoch = 5
+lr = 0.1
+dim = 100
+minCount = 1
+wordNgrams = 2
+minn = 0
+maxn = 0
+bucket = 2000000
+dsub = 2
+loss = softmax
+Training again with best arguments
+Read 2M words
+Number of words:  118456
+Number of labels: 10
+Progress: 100.0% words/sec/thread: 1049980 lr:  0.000000 avg.loss:  0.235721 ETA:   0h 0m 0s
+(10000, 0.9093, 0.9093)
+</code></pre></div>
+<p>模型保存结果为：</p>
+<p><img alt="image-20231113173354128" src="images/image-20231113173354128.png" /></p>
+<p>结论: 采用词为单位的模型效果精准率和召回率都达到了90.93%, 相比于前面的实验并没有得到提升。</p>
+<hr />
+<h2 id="4">4. 模型部署<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>工业界中的AI是指"能落地的AI", 即指在生产环境中可以部署并提供在线, 或离线作业的模型.<ul>
+<li>第一步: 编写主服务逻辑代码.</li>
+<li>第二步: 启动Flask服务.</li>
+<li>第三步: 编写测试代码.</li>
+<li>第四步: 执行测试并检验结果.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="41">4.1  服务端代码.<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>代码位置:</p>
+<div class="highlight"><pre><span></span><code> 03-fast_text/app.py
+</code></pre></div>
+<p>服务端代码实现了一个使用 FastText 模型进行文本分类的 Flask 服务。服务接收包含用户ID (<code>uid</code>) 和文本 (<code>text</code>) 的 POST 请求，对文本进行分词后，使用事先训练好的 FastText 模型进行分类预测，并返回分类结果。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+<span class="kn">import</span> <span class="nn">fasttext</span>
+
+<span class="c1"># 服务框架使用Flask, 导入工具包</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># 导入发送http请求的requests包</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># 加载自定义的停用词表</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">load_userdict</span><span class="p">(</span><span class="s1">&#39;./data/data/stopwords.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># 提供已经训练好的模型路径</span>
+<span class="n">model_save_path</span> <span class="o">=</span> <span class="s1">&#39;toutiao_fasttext_1699862718.bin&#39;</span>
+
+<span class="c1"># 实例化fasttext对象, 并加载模型参数用于推断, 提供服务请求</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_save_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FastText模型实例化完毕...&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设定投满分项目的服务的路由和请求方法</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/v1/main_server/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">main_server</span><span class="p">():</span>
+    <span class="c1"># 接收来自请求方发送的服务字段</span>
+    <span class="n">uid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+
+    <span class="c1"># 对请求文本进行处理, 因为前面加载的是基于分词的模型, 所以这里也要对text进行分词操作</span>
+    <span class="n">input_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+    <span class="c1"># 执行模型的预测</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
+    <span class="n">predict_name</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">predict_name</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Building prefix dict from the default dictionary ...
+Loading model from cache /var/folders/tp/phgg55c9549cnr0qyp8qf4j40000gn/T/jieba.cache
+Loading model cost 0.647 seconds.
+Prefix dict has been built successfully.
+Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.
+FastText模型实例化完毕...
+ * Serving Flask app &#39;app&#39;
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.43.153:5000
+</code></pre></div>
+<hr />
+<h3 id="42">4.2 客户端代码.<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>代码位置: </p>
+<div class="highlight"><pre><span></span><code>03-fast_text/test.py
+</code></pre></div>
+<p>客户端代码实现了向前面所述 FastText 模型提供的 Flask 服务发送 HTTP POST 请求，并输出分类结果和预测耗时。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 定义请求的url地址和传入的数据</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://0.0.0.0:5000/v1/main_server/&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;AI-6-202204&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;公共英语(PETS)写作中常见的逻辑词汇汇总&quot;</span><span class="p">}</span>
+<span class="c1"># 计时</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># 向服务发送请求</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># 获取处理时间</span>
+<span class="n">cost_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="c1"># 打印返回结果</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输入文本:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;分类结果:&#39;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;单条样本预测的耗时:&#39;</span><span class="p">,</span> <span class="n">cost_time</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;ms&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>输入文本: 公共英语(PETS)写作中常见的逻辑词汇汇总
+分类结果: __label__education
+单条样本预测耗时:  4.739046096801758 ms
+</code></pre></div>
+<h2 id="5">5. 结论<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>预测结果还不错, 同时更重要的是在GPU环境下预测时间仅仅不到5ms!!! 这是工业界场景下fasttext工具最大的意义!!!</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="js/extra.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+      
+    
+  </body>
+</html>

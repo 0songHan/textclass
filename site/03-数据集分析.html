@@ -1,0 +1,802 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="02-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.html">
+      
+      
+        <link rel="next" href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html">
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>2.2 数据分析与处理 - 头条投满分项目V4.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="头条投满分项目V4.0" class="md-header__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            头条投满分项目V4.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.2 数据分析与处理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="头条投满分项目V4.0" class="md-nav__button md-logo" aria-label="头条投满分项目V4.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    头条投满分项目V4.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF.html" class="md-nav__link">
+        1、项目背景
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          2、数据集
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          2、数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        2.1 数据集介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.2 数据分析与处理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="03-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E6%9E%90.html" class="md-nav__link md-nav__link--active">
+        2.2 数据分析与处理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.数据分析
+  </a>
+  
+    <nav class="md-nav" aria-label="1.数据分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 读数据并统计分类数量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 分析样本分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 进行分词预处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 处理测试集和验证集
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          3、模型训练与测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          3、模型训练与测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%A1%88%E4%BE%8B.html" class="md-nav__link">
+        3.1 随机森林-baseline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-fasttext%E5%AE%9E%E7%8E%B0.html" class="md-nav__link">
+        3.2 fastext的应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-bert%E6%A8%A1%E5%9E%8B.html" class="md-nav__link">
+        3.3 Bert模型使用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          4、模型压缩
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          4、模型压缩
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96.html" class="md-nav__link">
+        4.1 模型量化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F.html" class="md-nav__link">
+        4.2 知识蒸馏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09-%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F%E5%AE%9E%E8%B7%B5.html" class="md-nav__link">
+        4.3 知识蒸馏的实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10-%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D.html" class="md-nav__link">
+        4.4 模型剪枝
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.数据分析
+  </a>
+  
+    <nav class="md-nav" aria-label="1.数据分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 读数据并统计分类数量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 分析样本分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 进行分词预处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 处理测试集和验证集
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">数据集分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>掌握对数据进行快速分析的代码实现.</li>
+<li>掌握利用随机森林快速实现并评估基线模型.</li>
+</ul>
+<hr />
+<h2 id="1">1.数据分析<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>数据分析代码位置:</p>
+<div class="highlight"><pre><span></span><code> analysis.py
+</code></pre></div>
+<p>首先导入工具包：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+</code></pre></div>
+<p>主要包含以下内容：</p>
+<ul>
+<li>第一步: 读数据并统计分类数量</li>
+<li>第二步: 分析样本分布</li>
+<li>第三步: 进行分词预处理</li>
+<li>第四步: 处理验证集和测试集数据</li>
+</ul>
+<hr />
+<h3 id="11">1.1 读数据并统计分类数量<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>读取文本文件中的数据，分析了数据的基本信息，包括显示前10行数据、输出总样本数量以及每个类别的样本数量。使用了 pandas 库来处理数据，并使用 Counter 进行样本类别的计数</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 读取数据</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/data/train.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1"># 打印前10行</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># 获取样本数量</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="c1"># 统计每个类别的数量</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="c1"># 打印信息</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;***************************************&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>                    sentence  label
+0         中华女子学院：本科层次仅1专业招男生      3
+1     两天价网站背后重重迷雾：做个网站究竟要多少钱      4
+2  东5环海棠公社230-290平2居准现房98折优惠      1
+3  卡佩罗：告诉你德国脚生猛的原因 不希望英德战踢点球      7
+4    82岁老太为学生做饭扫地44年获授港大荣誉院士      5
+5       记者回访地震中可乐男孩：将受邀赴美国参观      5
+6          冯德伦徐若�隔空传情 默认其是女友      9
+7     传郭晶晶欲落户香港战伦敦奥运 装修别墅当婚房      1
+8           《赤壁OL》攻城战诸侯战硝烟又起      8
+9                “手机钱包”亮相科博会      4
+180000
+Counter({3: 18000, 4: 18000, 1: 18000, 7: 18000, 5: 18000, 9: 18000, 8: 18000, 2: 18000, 6: 18000, 0: 18000})
+10
+***************************************
+</code></pre></div>
+<hr />
+<h3 id="12">1.2 分析样本分布<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>统计了样本的总量、每个类别样本数量的比例，并计算了每行样本的长度以及文本长度的均值和方差。具体步骤如下：</p>
+<ol>
+<li><strong>计算样本总量：</strong> 通过遍历每个类别的样本数量，累加得到样本总量。</li>
+<li><strong>计算每个类别样本数量的比例：</strong> 遍历每个类别，计算其样本数量在总量中的比例，并输出。</li>
+<li><strong>统计每行样本的长度：</strong> 使用 pandas 库的 <code>apply</code> 函数，计算每行样本的长度，并将结果添加到数据框中。</li>
+<li><strong>统计文本长度的均值和方差：</strong> 使用 numpy 库计算文本长度的均值和方差，并输出结果</li>
+</ol>
+<p>具体实现如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 统计样本总量</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># 遍历每个类别的样本数量</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">count</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">v</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="c1"># 计算每个类别样本数量的比例</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">count</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;***************************************&#39;</span><span class="p">)</span>
+<span class="c1"># 统计每行样本的长度</span>
+<span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence_len&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+<span class="c1"># 打印前十行结果</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># 统计文本长度的均值和方差</span>
+<span class="n">length_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence_len&#39;</span><span class="p">])</span>
+<span class="n">length_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence_len&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length_mean = &#39;</span><span class="p">,</span> <span class="n">length_mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length_std = &#39;</span><span class="p">,</span> <span class="n">length_std</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>180000
+3 10.0 %
+4 10.0 %
+1 10.0 %
+7 10.0 %
+5 10.0 %
+9 10.0 %
+8 10.0 %
+2 10.0 %
+6 10.0 %
+0 10.0 %
+***************************************
+                    sentence  label  sentence_len
+0         中华女子学院：本科层次仅1专业招男生      3            18
+1     两天价网站背后重重迷雾：做个网站究竟要多少钱      4            22
+2  东5环海棠公社230-290平2居准现房98折优惠      1            25
+3  卡佩罗：告诉你德国脚生猛的原因 不希望英德战踢点球      7            25
+4    82岁老太为学生做饭扫地44年获授港大荣誉院士      5            23
+5       记者回访地震中可乐男孩：将受邀赴美国参观      5            20
+6          冯德伦徐若�隔空传情 默认其是女友      9            17
+7     传郭晶晶欲落户香港战伦敦奥运 装修别墅当婚房      1            22
+8           《赤壁OL》攻城战诸侯战硝烟又起      8            16
+9                “手机钱包”亮相科博会      4            11
+
+length_mean =  19.21257222222222
+length_std =  3.863787253359747
+</code></pre></div>
+<hr />
+<h3 id="13">1.3 进行分词预处理<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>使用了结巴分词库对文本进行分词，并对分词结果进行处理和保存。具体步骤如下：</p>
+<ol>
+<li><strong>结巴分词：</strong> 定义了一个函数 <code>cut_sentence</code> 用于进行结巴分词。</li>
+<li><strong>添加分词结果列：</strong> 使用 <code>apply</code> 函数将分词结果添加到数据框的新列中，列名为 'words'。</li>
+<li><strong>分词：</strong> 使用 <code>apply</code> 函数，将每行文本进行结巴分词，并将结果连接为字符串。 对分词结果进行处理，只保留每行的前30个元素。</li>
+<li><strong>结果存放到 CSV 文件：</strong> 将处理后的结果保存到名为 'train_new.csv' 的 CSV 文件中。</li>
+</ol>
+<p>具体实现如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 结巴分词</span>
+<span class="k">def</span> <span class="nf">cut_sentence</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="c1"># 添加一列数据存储分词后的结果</span>
+<span class="n">content</span><span class="p">[</span><span class="s1">&#39;words&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cut_sentence</span><span class="p">)</span>
+<span class="c1"># 打印前十行</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># 分词</span>
+<span class="n">content</span><span class="p">[</span><span class="s1">&#39;words&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s1">&#39;sentence&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cut_sentence</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+
+<span class="c1"># 将分词后的结果只保留30个元素</span>
+<span class="n">content</span><span class="p">[</span><span class="s1">&#39;words&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s1">&#39;words&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">())[:</span><span class="mi">30</span><span class="p">])</span>
+<span class="c1"># 结果存放到csv文件中</span>
+<span class="n">content</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./data/data/train_new.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.908 seconds.
+Prefix dict has been built successfully.
+                    sentence  label  sentence_len                                              words
+0         中华女子学院：本科层次仅1专业招男生      3            18           [中华, 女子, 学院, ：, 本科, 层次, 仅, 1, 专业, 招, 男生]
+1     两天价网站背后重重迷雾：做个网站究竟要多少钱      4            22   [两天, 价, 网站, 背后, 重重, 迷雾, ：, 做个, 网站, 究竟, 要, 多少, 钱]
+2  东5环海棠公社230-290平2居准现房98折优惠      1            25  [东, 5, 环, 海棠, 公社, 230, -, 290, 平, 2, 居, 准现房, 9...
+3  卡佩罗：告诉你德国脚生猛的原因 不希望英德战踢点球      7            25  [卡佩罗, ：, 告诉, 你, 德国, 脚, 生猛, 的, 原因,  , 不, 希望, 英德...
+4    82岁老太为学生做饭扫地44年获授港大荣誉院士      5            23  [82, 岁, 老太, 为, 学生, 做饭, 扫地, 44, 年, 获授, 港大, 荣誉, 院士]
+5       记者回访地震中可乐男孩：将受邀赴美国参观      5            20         [记者, 回访, 地震, 中, 可乐, 男孩, ：, 将, 受邀, 赴美国, 参观]
+6          冯德伦徐若�隔空传情 默认其是女友      9            17                [冯德伦, 徐若, �, 隔空, 传情,  , 默认, 其是, 女友]
+7     传郭晶晶欲落户香港战伦敦奥运 装修别墅当婚房      1            22   [传, 郭晶晶, 欲, 落户, 香港, 战, 伦敦, 奥运,  , 装修, 别墅, 当婚, 房]
+8           《赤壁OL》攻城战诸侯战硝烟又起      8            16               [《, 赤壁, OL, 》, 攻城战, 诸侯, 战, 硝烟, 又, 起]
+9                “手机钱包”亮相科博会      4            11                            [“, 手机, 钱包, ”, 亮相, 科博会]
+</code></pre></div>
+<hr />
+<h3 id="14">1.4 处理测试集和验证集<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p>依次同样的代码处理验证集dev.txt, 测试集test.txt, 同一个文件夹下生成dev_new.csv, test_new.csv文件.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="js/extra.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+      
+    
+  </body>
+</html>
